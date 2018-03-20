@@ -1,3 +1,4 @@
+var logger = require('logger')(module);
 var DateBase = require('DateBase');
 DateBase.connect();
 
@@ -8,7 +9,7 @@ function  run() {
     var petya = new User("Петя");
     vasya.hello(petya);
 
-    console.log(DateBase.getPhrases("Run succsesful"));
+    logger(DateBase.getPhrases("Run succsesful"));
 }
 
 

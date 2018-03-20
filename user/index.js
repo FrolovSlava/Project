@@ -1,12 +1,12 @@
 var DateBase = require('DateBase');
-
+var logger= require('logger')(module);
 
 function  User(name) {
     this.name = name;
 }
 
 User.prototype.hello = function (who) {
-    console.log(DateBase.getPhrases("Hello") + "," + who.name);
+    logger(DateBase.getPhrases("Hello") + "," + who.name);
 }
 
 console.log("user.js is required!");
