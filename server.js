@@ -1,6 +1,20 @@
-var user = require('./user')
+var DateBase = require('DateBase');
+DateBase.connect();
 
-var vasya = new user.User("Вася");
-var petya = new user.User("Петя");
+var User = require('./user');
 
-vasya.hello(petya);
+function  run() {
+    var vasya = new User("Вася");
+    var petya = new User("Петя");
+    vasya.hello(petya);
+
+    console.log(DateBase.getPhrases("Run succsesful"));
+}
+
+
+if(module.parent){
+    exports.run=run;
+}
+else{
+    run();
+}
