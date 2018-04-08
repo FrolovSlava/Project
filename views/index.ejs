@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<p id="hello">Hello</p>
+<form action="/form_handler" method="POST">
+  <input type="text" name="first_name" />
+  <!-- Другие поля добавляются аналогично -->
+  <input type="submit" value="Send" />
+</form>
+<p><a href="http://localhost:3000/index1">Посмотреть контакты</a></p>
+<input type="submit" value="Send" onclick="doit()"/>
+<script>
+    function doit(){
+        alert("ko");
+        $("<h1>test passes</h1>").appendTo("body");
+        $( "input" ).after( "<b>Hello</b>" );
+    }
+</script>
+</body>
+</html>
