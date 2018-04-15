@@ -2,6 +2,7 @@
 <html class="no-js"  lang="en">
 
 	<head>
+
 		<!-- META DATA -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,6 +59,42 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+		<script src="assets/js/jquery.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+
+		<!--modernizr.min.js-->
+		<script  src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+
+		<!--bootstrap.min.js-->
+		<script  src="assets/js/bootstrap.min.js"></script>
+
+		<!-- bootsnav js -->
+		<script src="assets/js/bootsnav.js"></script>
+
+		<!-- jquery.filterizr.min.js -->
+		<script src="assets/js/jquery.filterizr.min.js"></script>
+
+		<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+		<!--jquery-ui.min.js-->
+		<script src="assets/js/jquery-ui.min.js"></script>
+
+		<!-- counter js -->
+		<script src="assets/js/jquery.counterup.min.js"></script>
+		<script src="assets/js/waypoints.min.js"></script>
+
+		<!--owl.carousel.js-->
+		<script  src="assets/js/owl.carousel.min.js"></script>
+
+		<!-- jquery.sticky.js -->
+		<script src="assets/js/jquery.sticky.js"></script>
+
+		<!--datepicker.js-->
+		<script  src="assets/js/datepicker.js"></script>
+
+		<!--Custom JS-->
+		<script src="assets/js/custom.js"></script>
 	</head>
 
 	<body>
@@ -154,26 +191,30 @@
 
 								<ul class="nav nav-tabs" role="tablist">
 
-									<li role="presentation" class="active">
-									 	<a href="#tours" aria-controls="tours" role="tab" data-toggle="tab">
-									 		<i class="fa fa-tree"></i>
-									 		tours
-									 	</a>
+									<li role="presentation">
+										<a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">
+											<i class="fa fa-plane"></i>
+											Самолеты
+										</a>
 									</li>
 
 									<li role="presentation">
 										<a href="#hotels" aria-controls="hotels" role="tab" data-toggle="tab">
 											<i class="fa fa-building"></i>
-											hotels
+											Отели
 										</a>
 									</li>
 
-									<li role="presentation">
-									 	<a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">
-									 		<i class="fa fa-plane"></i>
-									 		flights
+									<li role="presentation" class="active">
+									 	<a href="#tours" aria-controls="tours" role="tab" data-toggle="tab">
+									 		<i class="fa fa-tree"></i>
+									 		Аренда авто
 									 	</a>
 									</li>
+
+
+
+
 								</ul>
 
 								<!-- Tab panes -->
@@ -190,7 +231,7 @@
 
 
 														<div class="travel-select-icon">
-															<select class="form-control " id="con">
+															<select class="form-control ">
 
                                                                 <% for(var i=0; i<optionl.length;i++) {%>
 																<option><%=optionl[i] %></option>
@@ -311,7 +352,7 @@
 												</div><!--/.col-->
 												<div class="clo-sm-7">
 													<div class="about-btn travel-mrt-0 pull-right">
-														<button  class="about-view travel-btn">
+														<button  class="about-view travel-btn" id="but">
 															search	
 														</button><!--/.travel-btn-->
 													</div><!--/.about-btn-->
@@ -445,7 +486,7 @@
   													<label for="radio01">
   														<span class="round-boarder">
   															<span class="round-boarder1"></span>
-  														</span>round trip
+  														</span> туда-обратно
   													</label>
 												</div><!--/.single-trip-circle-->
 												<div class="single-trip-circle">
@@ -453,7 +494,7 @@
   													<label for="radio02">
   														<span class="round-boarder">
   															<span class="round-boarder1"></span>
-  														</span>on way
+  														</span>в один конец
   													</label>
 												</div><!--/.single-trip-circle-->
 											</div><!--/.trip-circle-->
@@ -461,17 +502,26 @@
 												<div class="col-lg-4 col-md-4 col-sm-12">
 													<div class="single-tab-select-box">
 
-														<h2>from</h2>
+														<h2>Место отпраки</h2>
 
 														<div class="travel-select-icon">
-															<select class="form-control ">
+															<select class="form-control " id="destination">
 
-															  	<option value="default">enter your location</option><!-- /.option-->
+															  	<option value="default">укажите ваше местоположение</option><!-- /.option-->
 
-															  	<option value="turkey">turkey</option><!-- /.option-->
+																<%var lable=5;%>
+                                                                <% for(var i=0; i<optionl.length;i++) {%>
+																<option><%=optionl[i] %></option>
+                                                                <%} %>
 
-															  	<option value="russia">russia</option><!-- /.option-->
-															  	<option value="egept">egypt</option><!-- /.option-->
+																<script>
+                                                                    $( "#destination" ).change(function() {
+                                                                        let b = $("#destination option:selected").val();
+                                                                        lable = b;
+                                                                        alert(lable);
+                                                                    });
+																</script>
+
 
 															</select><!-- /.select-->
 														</div><!-- /.travel-select-icon -->
@@ -480,7 +530,7 @@
 
 												<div class="col-lg-2 col-md-3 col-sm-4">
 													<div class="single-tab-select-box">
-														<h2>departure</h2>
+														<h2>отправка</h2>
 														<div class="travel-check-icon">
 															<form action="#">
 																<input type="text" name="departure" class="form-control" data-toggle="datepicker"
@@ -492,7 +542,7 @@
 
 												<div class="col-lg-2 col-md-3 col-sm-4">
 													<div class="single-tab-select-box">
-														<h2>return</h2>
+														<h2>возращение</h2>
 														<div class="travel-check-icon">
 															<form action="#">
 																<input type="text" name="return" class="form-control" data-toggle="datepicker" placeholder="22 -01 - 2017 ">
@@ -501,27 +551,33 @@
 													</div><!--/.single-tab-select-box-->
 												</div><!--/.col-->
 
+
+
 												<div class="col-lg-2 col-md-1 col-sm-4">
 													<div class="single-tab-select-box">
-														<h2>adults</h2>
+														<h2>взрослые</h2>
 														<div class="travel-select-icon">
+
+
+
 															<select class="form-control ">
 
-															  	<option value="default">5</option><!-- /.option-->
+															  	<option value="default">1</option><!-- /.option-->
 
-															  	<option value="10">10</option><!-- /.option-->
+															  	<option value="2">2</option><!-- /.option-->
 
-															  	<option value="15">15</option><!-- /.option-->
-															  	<option value="20">20</option><!-- /.option-->
+															  	<option value="3">3</option><!-- /.option-->
+															  	<option value="4">4</option><!-- /.option-->
 
 															</select><!-- /.select-->
+
 														</div><!-- /.travel-select-icon -->
 													</div><!--/.single-tab-select-box-->
 												</div><!--/.col-->
 
 												<div class="col-lg-2 col-md-1 col-sm-4">
 													<div class="single-tab-select-box">
-														<h2>childs</h2>
+														<h2>дети</h2>
 														<div class="travel-select-icon">
 															<select class="form-control ">
 
@@ -529,8 +585,8 @@
 
 															  	<option value="2">2</option><!-- /.option-->
 
+															  	<option value="3">3</option><!-- /.option-->
 															  	<option value="4">4</option><!-- /.option-->
-															  	<option value="8">8</option><!-- /.option-->
 
 															</select><!-- /.select-->
 														</div><!-- /.travel-select-icon -->
@@ -543,17 +599,17 @@
 												<div class="col-lg-4 col-md-4 col-sm-12">
 													<div class="single-tab-select-box">
 
-														<h2>to</h2>
+														<h2>место назначения</h2>
 
 														<div class="travel-select-icon">
 															<select class="form-control ">
 
-															  	<option value="default">enter your destination location</option><!-- /.option-->
+															  	<option value="default">выберите место назначения</option><!-- /.option-->
 
-															  	<option value="istambul">istambul</option><!-- /.option-->
-
-															  	<option value="mosko">mosko</option><!-- /.option-->
-															  	<option value="cairo">cairo</option><!-- /.option-->
+																<%console.log(lable);%>
+                                                                <% for(var i=0; i<locationl.length;i++) {%>
+																<option><%=locationl[i] %></option>
+                                                                <%} %>
 
 															</select><!-- /.select-->
 														</div><!-- /.travel-select-icon -->
@@ -563,11 +619,11 @@
 												<div class="col-lg-3 col-md-3 col-sm-4">
 													<div class="single-tab-select-box">
 
-														<h2>class</h2>
+														<h2>Класс</h2>
 														<div class="travel-select-icon">
 															<select class="form-control ">
 
-															  	<option value="default">enter class</option><!-- /.option-->
+															  	<option value="default">выберите уровень</option><!-- /.option-->
 
 															  	<option value="A">A</option><!-- /.option-->
 
@@ -578,10 +634,11 @@
 														</div><!-- /.travel-select-icon -->
 													</div><!--/.single-tab-select-box-->
 												</div><!--/.col-->
+
 												<div class="clo-sm-5">
 													<div class="about-btn pull-right">
 														<button  class="about-view travel-btn">
-															search	
+															search
 														</button><!--/.travel-btn-->
 													</div><!--/.about-btn-->
 												</div><!--/.col-->
@@ -1572,44 +1629,23 @@
 
 
 
-		<script src="assets/js/jquery.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
 
-		<!--modernizr.min.js-->
-		<script  src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-
-
-		<!--bootstrap.min.js-->
-		<script  src="assets/js/bootstrap.min.js"></script>
-
-		<!-- bootsnav js -->
-		<script src="assets/js/bootsnav.js"></script>
-
-		<!-- jquery.filterizr.min.js -->
-		<script src="assets/js/jquery.filterizr.min.js"></script>
-
-		<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-
-		<!--jquery-ui.min.js-->
-        <script src="assets/js/jquery-ui.min.js"></script>
-
-        <!-- counter js -->
-		<script src="assets/js/jquery.counterup.min.js"></script>
-		<script src="assets/js/waypoints.min.js"></script>
-
-		<!--owl.carousel.js-->
-        <script  src="assets/js/owl.carousel.min.js"></script>
-
-        <!-- jquery.sticky.js -->
-		<script src="assets/js/jquery.sticky.js"></script>
-
-        <!--datepicker.js-->
-        <script  src="assets/js/datepicker.js"></script>
-
-		<!--Custom JS-->
-		<script src="assets/js/custom.js"></script>
+		<script src="assets/js/test.js"></script>
+		<script>
+            $('#but').click(function(){
+                var a=$("#con option:selected").val();
+                alert("chose "+a);
+            });
 
 
-	</body>
+
+
+		</script>
+
+
+
+
+
+</body>
 
 </html>

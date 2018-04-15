@@ -6,10 +6,13 @@ let cookieParser = require('cookie-parser');
 
 let bodyParser = require("body-parser");
 let mysql=require("mysql");
-let $=require("jquery/dist/jquery.js");
+
 
 let index = require('./routes/index');
 let users = require('./routes/users');
+let main = require('./routes/main');
+
+
 
 let app = express();
 
@@ -44,44 +47,53 @@ let connection=mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'1234',
-    database:'lab5',
+    database:'airplane',
     port: 3307,
 });
 
 
 
 let a;
-let query=connection.query("Select * from lab5 where id > 30",function (error,fields,result) {
+let query=connection.query("Select city from _from ",function (error,fields,result) {
     if (error) throw error;
-     a=fields[4].Name;
-    console.log(a);
+     a=fields[0].city;
+    console.log("fil "+a);
 });
 
 
-app.get("/index1", function(request, response){
-let a1=0;
-let c;
-    let query=connection.query("Select * from lab5 where id > 30",function (error,fields,result) {
-// title:  st,!!!!!!!!!!!!!!!!!!
-        if (error) throw error;
-        console.log(fields[0].Name);
-        c =fields[0].Name+",";
-for(a1=1;a1<5;a1++){
-    c =c+fields[a1].Name+",";
-}
-       c=c.substr(0, c.length - 1);
-        console.log(c);
-        a1=c.split(",");
-        for(let i=0;i<a1.length;i++){
-            console.log("a1 "+a1[i]);
-        }
-        //response.sendFile(path.join('/'));
-        response.render("index1", {
-            optionl:a1
-        });
-    });
-});
 
+// app.get("/index1", function(request, response){
+//     var b;
+//     var a2=0;
+//     var mas;
+//     $( "#destination" ).change(function() {
+//          b =$("#destination option:selected").val();
+//         alert( "chose"+b );
+//
+//     });
+//     let query=connection.query("SELECT _to.city FROM airplane.connector\n" +
+//         "inner join _from on _from.id=from_id\n" +
+//         "inner join _to on _to.id=to_id \n" +
+//         "where _from.city like \""+ b + ";",function (error,fields,result) {
+// // title:  st,!!!!!!!!!!!!!!!!!!
+//         if (error) throw error;
+//         console.log(fields[0].city);
+//         mas =fields[0].city+",";
+//         for(a2=1;a2<fields.length;a2++){
+//             mas =mas+fields[a2].city+",";
+//         }
+//         mas=mas.substr(0, mas.length - 1);
+//         console.log(mas);
+//         a2=mas.split(",");
+//         for(let i=0;i<a2.length;i++){
+//             console.log("city from "+a2[i]);
+//         }
+//         //response.sendFile(path.join('/'));
+//         response.render("index1", {
+//             locationl:a2
+//         });
+//     });
+// });
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -93,7 +105,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-
+app.use('/index1', main);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     let err = new Error('Not Found');
@@ -111,5 +123,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+
 
 module.exports = app;

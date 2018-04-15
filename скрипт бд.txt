@@ -1,0 +1,95 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- 
+-----------------------------------------------------
+--
+ -----------------------------------------------------
+-- Schema airplane
+--
+ -----------------------------------------------------
+
+-- 
+-----------------------------------------------------
+-- Schema airplane
+-- 
+-----------------------------------------------------
+
+CREATE SCHEMA IF NOT EXISTS `airplane` DEFAULT CHARACTER SET utf8 ;
+
+USE `airplane` ;
+
+
+-- -----------------------------------------------------
+-- Table `airplane`.`from`
+-- 
+-----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `airplane`.`from` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+ 
+ `city` VARCHAR(45) NULL,
+ 
+ PRIMARY KEY (`id`))
+
+ENGINE = InnoDB;
+
+
+--
+ -----------------------------------------------------
+-- Table `airplane`.`to`
+--
+ -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `airplane`.`to` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+ 
+ `city` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+
+ENGINE = InnoDB;
+
+
+--
+ -----------------------------------------------------
+-- Table `airplane`.`connector`
+-- 
+-----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `airplane`.`connector` (
+ 
+ `from_id` INT NOT NULL,
+  `to_id` INT NOT NULL,
+ 
+ INDEX `fk_connector_to1_idx` (`to_id` ASC),
+  CONSTRAINT `fk_connector_from`
+
+    FOREIGN KEY (`from_id`)
+    REFERENCES `airplane`.`from` (`id`)
+ 
+   ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_connector_to1`
+  
+  FOREIGN KEY (`to_id`)
+    REFERENCES `airplane`.`to` (`id`)
+   
+ ON DELETE NO ACTION
+   
+ ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
