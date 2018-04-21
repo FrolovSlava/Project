@@ -30,12 +30,34 @@ router.get("/", function(request, response){
 
         for(a1=0;a1<fields.length;a1++){
             toMas[a1] =fields[a1].to1;
+            //console.log(`${a1}: ${fields[a1].to1}`);
+            //console.log("res"+ result)
         }
-        let query1=connection.query("select count(id) as count from _from;",function (error,fields1,result) {
-            kol=fields1[0].count;
-            console.log("kol "+kol);
+        let locationQuety = connection.query("select _from.city from _from;",function (error, result, fields) {
+//получить все названия мест отправки
+            let ways = {};
+            //result = JSON.parse(JSON.stringify(result));
+            result.forEach(el=> {
+                ways[el.city] = [];
+            })
+
+            Object.keys(ways).forEach(el=> {
+                let destionQuery = connection.query("SELECT _to.city FROM airplane.connector\n" +
+                `inner join _from on _from.id=from_id\n` +
+                `inner join _to on _to.id=to_id where _from.city like '${el}';`, function (error, result, fields) {
+                    result.forEach(p => {
+                        ways[el].push(p.city)
+                    })
+//вернуть ways
+                    console.log(ways);
+                });
+                })
         });
 
+
+
+        //
+        // arr2.forEach{}
         // for(let i =0 ;;i++) {
         //    for (let j = 0;;j++) {
         //        if
